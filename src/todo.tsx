@@ -1,7 +1,5 @@
-import { CheckBox, TextBox, textVal } from "rahisi";
+import { CheckBox, TextBox } from "rahisi";
 import { React } from "rahisi";
-import { R } from "rahisi";
-import * as S from "rahisi";
 
 import {
     Renderable,
@@ -101,9 +99,7 @@ const headerSection =
         let editingDescription = "";
 
         const addTodo =
-            (e: R.KeyboardEvent<HTMLInputElement>) => {
-
-                editingDescription = textVal(e);
+            (e: React.KeyboardEvent<HTMLInputElement>) => {
 
                 if (e.keyCode !== ENTER_KEY || !notNullOrWhiteSpace(editingDescription)) {
                     return;
@@ -120,7 +116,7 @@ const headerSection =
             <header className="header">
                 <h1>todos</h1>
                 <TextBox className="new-todo" autoFocus={true} placeholder="What needs to be done?"
-                    onKeyUp={addTodo} value={description} />
+                   onTextChanged={(s) => editingDescription = s} onKeyUp={addTodo} value={description} />
             </header>;
 
         return s;
@@ -154,7 +150,7 @@ const todoTemplate =
                     };
 
                 const submitOrCancel =
-                    (e: R.KeyboardEvent<HTMLInputElement>) => {
+                    (e: React.KeyboardEvent<HTMLInputElement>) => {
                         switch (e.keyCode) {
                             case ESCAPE_KEY:
                                 item.description = currentDescription;
